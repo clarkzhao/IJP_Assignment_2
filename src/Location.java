@@ -1,29 +1,49 @@
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 public class Location {
 
-	private String description;
-	private String viewPosition;
+	private String location;
+	private ViewPosition viewPosition;
 	private HashMap<String, Location> exits;
 
-
-	public Location(String description, String viewPosition){
-		this.description = description;
-		this.viewPosition = viewPosition;
+	public Location(String description){
+		viewPosition = new ViewPosition();
+		this.location = description;
 		exits = new HashMap<>();
+		setView();
 	}
 
-	public void setExit(String direction, Location neighbor){
+	public void setExit(String viewPosition, Location neighbor){
 
-		String key = description + "_" + viewPosition;
+		String key = location + "_" + viewPosition;
 
 		exits.put(key, neighbor);
 	}
 
+	public void setView(){
+		viewPosition.setView("left", 1);
+		viewPosition.setView("right", 1);
+	}
+
+	public void setView(String direction, int degree){
+		viewPosition.setView(direction, degree);
+	}
+
+	public void addView(String direction, int degree){
+		for (int i=1; i <= degree; i++){
+			viewPosition.addView(direction);
+		}
+	}
+
+	public void setCurrentView(String direction, int degree){
+		viewPosition.setCurrentView(direction, degree);
+	}
+
     public String getShortDescription(){
-        return description;
+        return location;
     }
 
     public String getExitString()
@@ -36,7 +56,11 @@ public class Location {
         return returnString;
     }
 
-    public String getCurrentLocation(){
-    	return description + "_" + viewPosition;
+    public String getLocation(){
+    	return location;
+    }
+
+    public String getCurrentLocationName(){
+    	return location + "_" + viewPosition.getViewPositionName();
     }
 }

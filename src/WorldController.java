@@ -16,8 +16,20 @@ public class WorldController {
         imageView.setImage(image);
 	}
 
-    public void pressButton(ActionEvent event) {
-       Image basket = new Image("img/basket.png");
+    public void pressButtonRight(ActionEvent event) {
+    	String command = "right";
+    	Image basket = new Image("img/basket.png");
         basketView.setImage(basket);
     }
+
+    public void pressButtonLeft(ActionEvent event) {
+        Image basket = new Image("img/basket.png");
+         basketView.setImage(basket);
+     }
+
+    public void pressButtonForward(ActionEvent event) {
+        Image basket = new Image("img/basket.png");
+         basketView.setImage(basket);
+     }
+
 }
