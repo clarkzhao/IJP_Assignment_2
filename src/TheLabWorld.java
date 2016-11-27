@@ -12,17 +12,26 @@ public class TheLabWorld {
     	Hall0.addView("right", 1);
     	Hall1 = new Location("Hall1");
     	B31 = new Location("B31");
+//    	Hall0.setExit(1, neighbor);
+    	currentLocation = Hall0;
     }
 
-    private void processCommand(String command){
-    	if (command = "right"){
-
+    public void processCommand(String command){
+    	if (command == "right"){
+    		currentLocation.rotateRight();
+    	}else if  (command == "left") {
+    		currentLocation.rotateLeft();
+    	} else {
+    		System.err.append("Wrong command!");
     	}
-
     }
 
-    private void changeCurrentLocation(){
-
+    public String getCurrentPictureName(){
+    	return "img/" + currentLocation.getCurrentLocationName() + ".JPG";
     }
+
+//    private void changeCurrentLocation(){
+//
+//    }
 
 }

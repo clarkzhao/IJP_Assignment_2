@@ -1,35 +1,23 @@
 import java.util.Set;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.ArrayList;
+//import java.util.Iterator;
+//import java.util.ArrayList;
 
 public class Location {
 
 	private String location;
 	private ViewPosition viewPosition;
-	private HashMap<String, Location> exits;
+	private HashMap<Integer, Location> exits;
 
-	public Location(String description){
-		viewPosition = new ViewPosition();
-		this.location = description;
+	public Location(String locationName){
+		location = locationName;
 		exits = new HashMap<>();
-		setView();
+		viewPosition = new ViewPosition();
 	}
 
-	public void setExit(String viewPosition, Location neighbor){
-
-		String key = location + "_" + viewPosition;
-
-		exits.put(key, neighbor);
-	}
-
-	public void setView(){
-		viewPosition.setView("left", 1);
-		viewPosition.setView("right", 1);
-	}
-
-	public void setView(String direction, int degree){
-		viewPosition.setView(direction, degree);
+	public void setExit(int currentView, Location neighbor){
+//		String key = location + "_" + viewPosition.getCurrentViewName();
+		exits.put(currentView, neighbor);
 	}
 
 	public void addView(String direction, int degree){
@@ -38,13 +26,28 @@ public class Location {
 		}
 	}
 
-	public void setCurrentView(String direction, int degree){
-		viewPosition.setCurrentView(direction, degree);
+
+	public void rotateRight(){
+		int previousCurrentView = viewPosition.getCurrentView();
+		int currentView = previousCurrentView +1;
+		if (currentView <= viewPosition.getTotalDegree()){
+			viewPosition.setCurrentView(currentView);
+		}
+		else{
+			viewPosition.setCurrentView(currentView - viewPosition.getTotalDegree());
+		}
 	}
 
-    public String getShortDescription(){
-        return location;
-    }
+	public void rotateLeft(){
+		int previousCurrentView = viewPosition.getCurrentView();
+		int currentView = previousCurrentView -1;
+		if (currentView > 0){
+			viewPosition.setCurrentView(currentView);
+		}
+		else{
+			viewPosition.setCurrentView(currentView + viewPosition.getTotalDegree());
+		}
+	}
 
     public String getExitString()
     {
@@ -61,6 +64,6 @@ public class Location {
     }
 
     public String getCurrentLocationName(){
-    	return location + "_" + viewPosition.getViewPositionName();
+    	return location + "_" + viewPosition.getCurrentViewName();
     }
 }

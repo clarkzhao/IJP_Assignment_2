@@ -4,7 +4,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
 public class WorldController {
-
+	private TheLabWorld lab;
 	@FXML
 	private ImageView imageView;
 
@@ -12,19 +12,29 @@ public class WorldController {
 	private ImageView basketView;
 
 	public void Initialise() {
-        Image image = new Image("img/Hall0_middle.JPG");
+		lab = new TheLabWorld();
+		String labPictureName = lab.getCurrentPictureName();
+		System.out.println(labPictureName);
+        Image image = new Image(labPictureName);
         imageView.setImage(image);
 	}
 
     public void pressButtonRight(ActionEvent event) {
     	String command = "right";
-    	Image basket = new Image("img/basket.png");
-        basketView.setImage(basket);
+    	lab.processCommand(command);
+    	String labPictureName = lab.getCurrentPictureName();
+		System.out.println(labPictureName);
+    	Image image = new Image(labPictureName);
+    	imageView.setImage(image);
     }
 
     public void pressButtonLeft(ActionEvent event) {
-        Image basket = new Image("img/basket.png");
-         basketView.setImage(basket);
+    	String command = "left";
+    	lab.processCommand(command);
+    	String labPictureName = lab.getCurrentPictureName();
+		System.out.println(labPictureName);
+    	Image image = new Image(labPictureName);
+    	imageView.setImage(image);
      }
 
     public void pressButtonForward(ActionEvent event) {
