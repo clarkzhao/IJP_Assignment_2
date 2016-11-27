@@ -1,37 +1,109 @@
+import java.util.ArrayList;
+
 public class TheLabWorld {
 
 	private Location currentLocation;
-
+//	public PortableItem basket;
+//	public PortableItem warter;
+//	public ArrayList<PortableItem> itemList;
+	public PortableItem[] itemList;
 	public TheLabWorld(){
 		createWorld();
 	}
 
     private void createWorld(){
-    	Location Hall0, Hall1, B31;
-    	Hall0 = new Location("Hall0");
-    	Hall0.addView("right", 1);
-    	Hall1 = new Location("Hall1");
-    	B31 = new Location("B31");
-//    	Hall0.setExit(1, neighbor);
+//Locations
+    	Location Hall0, Hall1, B30, B31, B32;
+    	Hall0 = new Location("Hall0", 5);
+    	Hall1 = new Room("Hall1",4);
+    	B30 = new Room("B30",4);
+    	B31 = new Room("B31",4);
+    	B32 = new Room("B32",4);
+//    	Hall0.setExit(5, B31);
+    	Hall0.setExit(1, B30);
+//    	Hall0.setExit(2, B32);
+//    	Hall0.setExit(3, Hall1);
+    	B30.setExit(3, Hall0);
     	currentLocation = Hall0;
+ //Items
+    	itemList = new PortableItem[2];
+    	itemList[0] = new PortableItem("basket");
+    	itemList[1] = new PortableItem("water");
     }
 
-    public void processCommand(String command){
+    public PortableItem[] getItemList(){
+    	return itemList;
+    }
+
+    public void putDownItem(int i){
+    	this.itemList[i].putDownItem(currentLocation);
+    }
+
+    public void pickUpItem(int i){
+    	this.itemList[i].pickUpItem();
+    }
+
+    public boolean canPickUp(int i){
+    	//in pocket
+    	if (itemList[i].getCurrentLocation() == null){
+    		return false;
+    	}
+    	// in current location
+    	else if (currentLocation.equals(itemList[i].getCurrentLocation())){
+    		return true;
+    	}
+    	//in other locaiton
+    	else {
+    		return false;
+    	}
+    }
+
+    public boolean canPutdown(int i){
+    	// in pocket
+    	if (itemList[i].getCurrentLocation() == null ){
+    		return true;
+    	}
+    	// not in pocket
+    	else {
+    		return false;
+    	}
+    }
+
+	public void processCommand(String command){
     	if (command == "right"){
     		currentLocation.rotateRight();
-    	}else if  (command == "left") {
+    	}
+    	else if (command == "left") {
     		currentLocation.rotateLeft();
-    	} else {
+    	}
+    	else if (command == "forward"){
+    		Location nextLocation = currentLocation.moveforward();
+    		if (nextLocation == null){
+                System.out.println("There is no room forward!");
+    		}
+    		else {
+    			currentLocation = nextLocation;
+    		}
+    	}
+    	else {
     		System.err.append("Wrong command!");
     	}
+    }
+
+    public Location getCurrentLocaiton(){
+    	return currentLocation;
+    }
+
+    public String getCurrentLocationName(){
+    	return currentLocation.getLocation();
     }
 
     public String getCurrentPictureName(){
     	return "img/" + currentLocation.getCurrentLocationName() + ".JPG";
     }
 
-//    private void changeCurrentLocation(){
-//
-//    }
+    public boolean isForwardable(){
+    	return currentLocation.isForwardable();
+    }
 
 }

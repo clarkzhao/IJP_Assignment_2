@@ -1,4 +1,3 @@
-import java.util.Set;
 import java.util.HashMap;
 //import java.util.Iterator;
 //import java.util.ArrayList;
@@ -6,64 +5,80 @@ import java.util.HashMap;
 public class Location {
 
 	private String location;
-	private ViewPosition viewPosition;
-	private HashMap<Integer, Location> exits;
+//	private ViewPosition viewPosition;
+	private int totalViewDegree;
+	protected int currentViewDegree;
+	protected HashMap<Integer, Location> exits;
 
-	public Location(String locationName){
+	public Location(String locationName, int degree){
 		location = locationName;
 		exits = new HashMap<>();
-		viewPosition = new ViewPosition();
+		totalViewDegree = degree; //Every location should at least have 4 directions
+		currentViewDegree = 1; //The first one is middle, 1-based index.
 	}
 
-	public void setExit(int currentView, Location neighbor){
-//		String key = location + "_" + viewPosition.getCurrentViewName();
-		exits.put(currentView, neighbor);
+	public void setExit(int degree, Location location){
+		exits.put(degree, location);
 	}
-
-	public void addView(String direction, int degree){
-		for (int i=1; i <= degree; i++){
-			viewPosition.addView(direction);
-		}
-	}
-
 
 	public void rotateRight(){
-		int previousCurrentView = viewPosition.getCurrentView();
-		int currentView = previousCurrentView +1;
-		if (currentView <= viewPosition.getTotalDegree()){
-			viewPosition.setCurrentView(currentView);
-		}
-		else{
-			viewPosition.setCurrentView(currentView - viewPosition.getTotalDegree());
+		currentViewDegree++;
+		if (currentViewDegree > totalViewDegree){
+			currentViewDegree = currentViewDegree - totalViewDegree;
 		}
 	}
 
 	public void rotateLeft(){
-		int previousCurrentView = viewPosition.getCurrentView();
-		int currentView = previousCurrentView -1;
-		if (currentView > 0){
-			viewPosition.setCurrentView(currentView);
-		}
-		else{
-			viewPosition.setCurrentView(currentView + viewPosition.getTotalDegree());
+		currentViewDegree--;
+		if (currentViewDegree <= 0){
+			currentViewDegree += totalViewDegree;
 		}
 	}
 
-    public String getExitString()
-    {
-        String returnString = "Exits:";
-        Set<String> keys = exits.keySet();
-        for(String exit : keys) {
-            returnString += " " + exit;
-        }
-        return returnString;
-    }
+	public Location moveforward(){
+		Location nextLocation = exits.get(currentViewDegree);
+		System.out.println(currentViewDegree);
+		if (isForwardable()){
+	    	switch (currentViewDegree){
+	    	case 1:
+	    		currentViewDegree = 4;
+	    		break;
+	    	case 2:
+	    		currentViewDegree = 5;
+	    		break;
+	    	case 3:
+	    		currentViewDegree = 5;
+	    		break;
+	    	case 5:
+	    		currentViewDegree = 3;
+	    		break;
+	    	}
+		}
+		System.out.println(currentViewDegree);
+		return nextLocation;
+	}
 
+	public boolean isForwardable(){
+		return exits.containsKey(currentViewDegree);
+	}
     public String getLocation(){
     	return location;
     }
 
     public String getCurrentLocationName(){
-    	return location + "_" + viewPosition.getCurrentViewName();
+    	return location + "_" + currentViewDegree;
+    }
+
+    public boolean equals(Object obj){
+    	if (this == obj) {
+    		return true;
+    	}
+    	Location other = (Location) obj;
+    	if (location == other.getLocation()){
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
 }
