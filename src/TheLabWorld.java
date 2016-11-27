@@ -13,22 +13,27 @@ public class TheLabWorld {
 
     private void createWorld(){
 //Locations
-    	Location Hall0, Hall1, B30, B31, B32;
+    	Location Hall0, Hall1, B30, B31, B32,kitchen;
     	Hall0 = new Location("Hall0", 5);
     	Hall1 = new Room("Hall1",4);
+    	kitchen = new Room("kitchen",4);
     	B30 = new Room("B30",4);
     	B31 = new Room("B31",4);
     	B32 = new Room("B32",4);
-//    	Hall0.setExit(5, B31);
     	Hall0.setExit(1, B30);
+    	Hall0.setExit(5, B31);
 //    	Hall0.setExit(2, B32);
 //    	Hall0.setExit(3, Hall1);
     	B30.setExit(3, Hall0);
+    	B30.setExit(4, kitchen);
+    	B31.setExit(3, Hall0);
+    	kitchen.setExit(3, B30);
     	currentLocation = Hall0;
  //Items
-    	itemList = new PortableItem[2];
+    	itemList = new PortableItem[3];
     	itemList[0] = new PortableItem("basket");
     	itemList[1] = new PortableItem("water");
+    	itemList[2] = new PortableItem("rabbit");
     }
 
     public PortableItem[] getItemList(){

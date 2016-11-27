@@ -5,7 +5,6 @@ public class Room extends Location {
 	}
 	public Location moveforward(){
 		Location nextLocation = this.exits.get(currentViewDegree);
-		System.out.println(currentViewDegree);
 		if (nextLocation != null){
 	    	switch (currentViewDegree){
 	    	case 1:
@@ -22,7 +21,6 @@ public class Room extends Location {
 	    		break;
 	    	}
 		}
-		System.out.println(currentViewDegree);
 		return nextLocation;
 	}
 

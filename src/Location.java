@@ -37,7 +37,6 @@ public class Location {
 
 	public Location moveforward(){
 		Location nextLocation = exits.get(currentViewDegree);
-		System.out.println(currentViewDegree);
 		if (isForwardable()){
 	    	switch (currentViewDegree){
 	    	case 1:
@@ -54,7 +53,6 @@ public class Location {
 	    		break;
 	    	}
 		}
-		System.out.println(currentViewDegree);
 		return nextLocation;
 	}
 

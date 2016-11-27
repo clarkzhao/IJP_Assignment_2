@@ -6,14 +6,16 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WorldController">
    <children>
-      <Button layoutX="517.0" layoutY="260.0" mnemonicParsing="false" onAction="#pressButtonRight" text="---&gt;" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="40.0" />
-      <ImageView fx:id="imageView" fitHeight="360.0" fitWidth="402.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="184.0" />
-      <ImageView fx:id="basketView" fitHeight="70.0" fitWidth="70.0" layoutX="310.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="52.0" />
-      <Button layoutX="451.0" layoutY="260.0" mnemonicParsing="false" onAction="#pressButtonLeft" text="&lt;---" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="100.0" />
-      <Button fx:id="forward" layoutX="473.0" layoutY="225.0" mnemonicParsing="false" onAction="#pressButtonForward" text="Forward" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="55.0" />
+      <Button layoutX="501.0" layoutY="303.0" mnemonicParsing="false" onAction="#pressButtonRight" text="---&gt;" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="54.0" />
+      <ImageView fx:id="imageView" fitHeight="255.0" fitWidth="345.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="241.0" />
+      <ImageView fx:id="basketView" fitHeight="70.0" fitWidth="70.0" layoutX="155.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="233.0" />
+      <Button layoutX="387.0" layoutY="303.0" mnemonicParsing="false" onAction="#pressButtonLeft" text="&lt;---" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="154.0" />
+      <Button fx:id="forward" layoutX="439.0" layoutY="268.0" mnemonicParsing="false" onAction="#pressButtonForward" text="Forward" AnchorPane.bottomAnchor="105.0" AnchorPane.rightAnchor="92.0" />
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="Basket">
@@ -28,11 +30,24 @@
               <MenuItem fx:id="putDown1" mnemonicParsing="false" onAction="#putDownWater" text="Put Down" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Rabbit">
+              <items>
+                <MenuItem fx:id="pickUp2" mnemonicParsing="false" onAction="#pickUpRabbit" text="Pick Up" />
+                  <MenuItem fx:id="putDown2" mnemonicParsing="false" onAction="#putDownRabbit" text="Put Down" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
-      <ImageView fx:id="pocketView" fitHeight="150.0" fitWidth="171.0" layoutX="391.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="5.0" />
-      <ImageView fx:id="water" fitHeight="70.0" fitWidth="70.0" layoutX="433.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="100.0" />
-      <ImageView fx:id="basket" fitHeight="70.0" fitWidth="70.0" layoutX="515.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" />
-      <ImageView fx:id="waterView" fitHeight="70.0" fitWidth="70.0" layoutX="215.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="water" fitHeight="50.0" fitWidth="50.0" layoutX="121.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="453.0" AnchorPane.topAnchor="72.0" />
+      <ImageView fx:id="rabbit" fitHeight="50.0" fitWidth="50.0" layoutX="187.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="363.0" AnchorPane.topAnchor="72.0" />
+      <ImageView fx:id="waterView" fitHeight="70.0" fitWidth="70.0" layoutX="245.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="233.0" />
+      <ImageView fx:id="rabbitView" fitHeight="70.0" fitWidth="70.0" layoutX="63.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="233.0" />
+      <ImageView fx:id="basket" fitHeight="50.0" fitWidth="50.0" layoutX="38.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="523.0" AnchorPane.topAnchor="71.0" />
+      <ImageView fx:id="mapView" fitHeight="239.0" fitWidth="239.0" layoutX="347.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="146.0" AnchorPane.rightAnchor="14.0" />
+      <Text fx:id="showPosition" layoutX="374.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your are in: " wrappingWidth="184.21875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
