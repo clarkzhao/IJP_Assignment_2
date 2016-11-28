@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.2in]{geometry}
+\usepackage[utf8]{inputenc}
+
+\title{Introduction to java programming \\ Assignment 2}
+\author{Siyuan Zhao \\ ID: s1682851 }
+\date{October 2016}
+
+\begin{document}
+
+\maketitle
+
+\section{Briefly describe your class design, including the function and relationships between the important classes. You may do this using text and/or diagrams, but the result must be clear and concise.}
+I have the following class.
+
+\begin{itemize}
+	\item Class {\bf Location} is used to describe the location in the world. It has the following attributes. {\bf String location} is the name of the location.  {\bf int totalViewDegree} is the total number of directions of views. {\bf int currentViewDegree} is the current direction. {\bf HashMap }$\langle ${\bf Integer, Location}$ \rangle$ {\bf exits} stores the exits location and corresponding direction.
+		It has the following methods:
+	\begin{itemize}
+		\item  {\bf public Location(String locationName, int degree)}: It is the constructer to define the attributes.
+		\item {\bf public void setExit(int degree, Location location)} sets the exits of next location.
+		\item {\bf public void rotateRight} changes {\bf currentView} to define the behaviour of rotate right.
+		\item {\bf public void rotateLeft} defines the behaviour of rotate right.
+		\item {\bf public Location moveForward()} defines the behaviour of move forward and it returns the next location. The {\bf currentViewDegree} is changed in the meantime to set the new {\bf currentView} when people come back to this location.
+		\item {\bf public boolean isForwardable} checks whether people can move forward in current direction.
+		\item {\bf public String getLocation} is a getter function to get the attribute {\bf Location}.
+		\item {\bf public String getCurrentLocationName} returns a string combining the location name and direction.
+		\item {\bf public boolean equals(Object obj)} checks whether one location equals to another location in content. Only name is checked because if the name is equal, the location should be the same.
+
+	\end{itemize}
+	
+	\item Class {\bf Room} is a subclass of class {\bf Location} the only difference is the method of {\bf moveForward}. It describes a special location when there is only four direction so the {\bf currentViewDegree} is changed differently when people come back.
+	\item Class {\bf PortableItem} describes the portable item to be picked up and put down by user. It has attributes {\bf String name} which is the name of the item and {\bf Location currentLocation } which is the place that it is placed. When it is {\bf null} type, it means the item has not been put in any locaition yet. This class has the following functions.
+		\begin{itemize}
+			\item {\bf public PortableItem(String name)} is the constructor.
+			\item {\bf public String getName()} returns the name of the item.
+			\item {\bf public Location getCurrentLocation()} returns the current location of the item.
+			\item {\bf public void putDownItem(Location location)} put down the item and change the current location.
+			\item {\bf public void pickUpItem()} pick up the item and make the current location become {\bf null} type.
+			\item {\bf public boolean isBeenPutDown()} to check if the item has been put down in any locations.
+		\end{itemize}
+
+	\item Class {\bf TheLabWorld} describes the the lab world in university of Edinburgh in forest hill. It has the following attributes {\bf Location currentLocation} is the current location where the user is. {\bf public PortableItem[] itemList} is the portable items list. 
+	\begin{itemize}
+	\item {\bf TheLabWorld()} constructor to build the world.
+	\item {\bf private void createWorld()} is the method to create the world. All locations and portable items needed is built here.
+	\item {\bf public PortableItem[] getItemList()} gets the item list array.
+	\item {\bf public void putDownItem(int i)} puts down an item specified by variable {\bf int i}.
+	\item {\bf public void pickUpItem(int i)} pick up one item specified by {\bf int i}.
+	\item {\bf public boolean canPickUp(int i)} check if one item can be picked up. 
+	\item {\bf public boolean canPutdown(int i)} check if one item can be put down.
+	\item {\bf public void processCommand(String command)} Process the given command from "right", "left" and "forward".
+	\item {\bf public Location getCurrentLocaiton()} gets current location.
+	\item {\bf String getCurrentLocationName()} get current location's name.
+	\item {\bf     public String getCurrentPictureName()} returns the file url.
+	\item {\bf    public boolean isForwardable()}checks if people can forward in current location.
+	\end{itemize}
+	\item  Class {\bf WorldController} is the controller for the world. It has attributes {\bf TheLabWorld lab}, {\bf ImageView imageView, mapView} for the image view on the left of the pane. {\bf ImageView basketView, waterView, rabbitView} for image view on the left of the pane and {\bf ImageView basket, water, rabbit } for the image view on the top left of the plane. {\bf Button forward} is for the forward command, {MenuItem pickUp0, pickUp1, putDown0, putDown1, pickUp2, putDown2} for the menu item and {\bf Text showPosition} for the text indicating the current location for the user.
+
+	\begin{itemize}
+		\item {\bf 	public void Initialise() } initialise the lab world.
+		\item {\bf public void updateItem()} updates the image view of item in the pane.
+		\item {\bf public void pickUpBasket(ActionEvent event)} is the pick up action for the basket item.
+		\item {\bf public void putDownBasket(ActionEvent event)}is the put down action for the basket item.
+		\item {\bf public void pickUpWater(ActionEvent event)}Pick up action for the bottle of water item.
+		\item {\bf public void putDownWater(ActionEvent event)}put down action for the bottle of water item.
+		\item {\bf public void pickUpRabbit(ActionEvent event)}Pick up action for the rabbit item.
+		\item {\bf public void putDownRabbit(ActionEvent event)} put down action for the rabbit item.
+		\item {\bf public void updateMenu()} update the menu set some of menu item disable.
+		\item {\bf private void processButton(String command)} process the button.
+		\item {\bf public void pressButtonRight(ActionEvent event) } process the button to rotate right.
+		\item {\bf public void pressButtonLeft(ActionEvent event) } process the button to rotate right.
+		\item {\bf public void pressButtonForward(ActionEvent event)} process the button to move forward.
+	\end{itemize}
+\end{itemize}
+
+\section{Briefly describe one or two significant choices that you had to make in the model design and explain why you chose your design over some plausible alternative.}
+At first I want to use string to defines the direction of view such as "left", "right", "forward" and "backward". However, what if I need the direction such as "right forward" to turn to the one of the doors in the small wall. Actually, Using string to describe angles is not smart. I finally use integer to describes directions. They are 1-based indices. and "1" indicates the starting directions which is forward and I actually don't care how many directions do I need which is convenient for the further developing.
+
+\section{Add any extra comments that you would like to make about your solution, or the assignment in general. In particular:}
+\subsection{You should note any external resources from which you took code, and any significant col- laborations with others.}
+I did this work independently.
+\subsection{It would also be useful if you could indicate here if you would be prepared to allow us to publish your screenshots – many students produce interesting interfaces and images and it is useful to be able to show these to others – for example, the course website shows some previous implementations.}
+I would be prepared to publish your screenshots
+\end{document}

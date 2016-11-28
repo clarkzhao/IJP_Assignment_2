@@ -1,15 +1,21 @@
 import java.util.HashMap;
-//import java.util.Iterator;
-//import java.util.ArrayList;
-
+/***
+ * Class Location is used to describe the location in the world.
+ * @author zhaosiyuan
+ *
+ */
 public class Location {
 
 	private String location;
-//	private ViewPosition viewPosition;
 	private int totalViewDegree;
 	protected int currentViewDegree;
 	protected HashMap<Integer, Location> exits;
 
+	/***
+	 * used to describe the location in the world.
+	 * @param locationName is the name of the location.
+	 * @param degree is the the current direction.
+	 */
 	public Location(String locationName, int degree){
 		location = locationName;
 		exits = new HashMap<>();
@@ -17,10 +23,18 @@ public class Location {
 		currentViewDegree = 1; //The first one is middle, 1-based index.
 	}
 
+	/***
+	 * sets the exits of next location.
+	 * @param degree is the degree connected to the exits location
+	 * @param location is the destination exits location
+	 */
 	public void setExit(int degree, Location location){
 		exits.put(degree, location);
 	}
 
+	/***
+	 * rotate right
+	 */
 	public void rotateRight(){
 		currentViewDegree++;
 		if (currentViewDegree > totalViewDegree){
@@ -28,6 +42,9 @@ public class Location {
 		}
 	}
 
+	/***
+	 * rotate left
+	 */
 	public void rotateLeft(){
 		currentViewDegree--;
 		if (currentViewDegree <= 0){
@@ -35,7 +52,11 @@ public class Location {
 		}
 	}
 
-	public Location moveforward(){
+	/***
+	 * move forward
+	 * @return the next location
+	 */
+	public Location moveForward(){
 		Location nextLocation = exits.get(currentViewDegree);
 		if (isForwardable()){
 	    	switch (currentViewDegree){
@@ -48,7 +69,7 @@ public class Location {
 	    	case 3:
 	    		currentViewDegree = 5;
 	    		break;
-	    	case 5:
+	    	case 6:
 	    		currentViewDegree = 3;
 	    		break;
 	    	}
@@ -56,17 +77,35 @@ public class Location {
 		return nextLocation;
 	}
 
+	/***
+	 * checks whether p eople can move forward in current direction
+	 * @return
+	 */
 	public boolean isForwardable(){
 		return exits.containsKey(currentViewDegree);
 	}
+
+	/***
+	 * it's a getter function to get the attribute Location
+	 * @return the name of the lation
+	 */
     public String getLocation(){
     	return location;
     }
 
+    /***
+     * returns a string combining the location name and direction.
+     * @return a string for the picture name.
+     */
     public String getCurrentLocationName(){
     	return location + "_" + currentViewDegree;
     }
 
+    /***
+     * checks whether one location equals to another location in content.
+     * Only name is checked because if the name is equal,
+     * the location should be the same.
+     */
     public boolean equals(Object obj){
     	if (this == obj) {
     		return true;

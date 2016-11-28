@@ -12,7 +12,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WorldController">
    <children>
       <Button layoutX="501.0" layoutY="303.0" mnemonicParsing="false" onAction="#pressButtonRight" text="---&gt;" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="54.0" />
-      <ImageView fx:id="imageView" fitHeight="255.0" fitWidth="345.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="241.0" />
+      <ImageView fx:id="imageView" fitHeight="255.0" fitWidth="345.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="241.0" AnchorPane.topAnchor="135.0" />
       <ImageView fx:id="basketView" fitHeight="70.0" fitWidth="70.0" layoutX="155.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="233.0" />
       <Button layoutX="387.0" layoutY="303.0" mnemonicParsing="false" onAction="#pressButtonLeft" text="&lt;---" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="154.0" />
       <Button fx:id="forward" layoutX="439.0" layoutY="268.0" mnemonicParsing="false" onAction="#pressButtonForward" text="Forward" AnchorPane.bottomAnchor="105.0" AnchorPane.rightAnchor="92.0" />

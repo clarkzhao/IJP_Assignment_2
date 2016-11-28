@@ -5,6 +5,11 @@ import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
+/**
+ * The controller for the world
+ * @author zhaosiyuan
+ *
+ */
 public class WorldController {
 	private TheLabWorld lab;
 	@FXML
@@ -22,9 +27,11 @@ public class WorldController {
 	@FXML
 	private Text showPosition;
 
+	/**
+	 *
+	 */
 	public void Initialise() {
 		lab = new TheLabWorld();
-		String labPictureName = lab.getCurrentPictureName();
         Image image = new Image("img/Hall0_1.JPG");
         imageView.setImage(image);
         Image mapImage = new Image("img/map.png");
@@ -34,6 +41,9 @@ public class WorldController {
         showPosition.setText("Your are in: "+ lab.getCurrentLocationName());
 	}
 
+	/**
+	 * Update the image view of item in the pane
+	 */
 	public void updateItem(){
         Image basketImage = new Image("img/basket.png");
         Image waterImage = new Image("img/water.png");
@@ -80,38 +90,70 @@ public class WorldController {
 			}
 		}
 	}
+
+	/**
+	 * Pick up action for the basket item
+	 * @param event
+	 */
     public void pickUpBasket(ActionEvent event){
     	lab.pickUpItem(0);
     	updateItem();
     	updateMenu();
     }
+
+    /**
+     * put down action for the basket item
+     * @param event
+     */
     public void putDownBasket(ActionEvent event){
     	lab.putDownItem(0);
     	updateItem();
     	updateMenu();
     }
 
+    /**
+     * Pick up action for the bottle of water item
+     * @param event
+     */
     public void pickUpWater(ActionEvent event){
     	lab.pickUpItem(1);
     	updateItem();
     	updateMenu();
     }
+
+    /**
+     * put down action for the bottle of water item
+     * @param event
+     */
     public void putDownWater(ActionEvent event){
     	lab.putDownItem(1);
     	updateItem();
     	updateMenu();
     }
+
+    /**
+     * Pick up action for the rabbit item
+     * @param event
+     */
     public void pickUpRabbit(ActionEvent event){
     	lab.pickUpItem(2);
     	updateItem();
     	updateMenu();
     }
+
+    /**
+     * put down action for the rabbit item
+     * @param event
+     */
     public void putDownRabbit(ActionEvent event){
     	lab.putDownItem(2);
     	updateItem();
     	updateMenu();
     }
 
+    /**
+     * update the menu set some of menu item disable
+     */
     public void updateMenu(){
     	MenuItem[][] menuItem = new MenuItem[3][2];
     	MenuItem[] basketpMenuItem = new MenuItem[2];
@@ -144,6 +186,10 @@ public class WorldController {
 		}
     }
 
+    /**
+     * process the button
+     * @param command
+     */
 	private void processButton(String command){
 		lab.processCommand(command);
 		if (!lab.isForwardable()){
@@ -160,16 +206,28 @@ public class WorldController {
         showPosition.setText("Your are in: "+ lab.getCurrentLocationName());
     }
 
+	/**
+	 * process the button to rotate right
+	 * @param event
+	 */
     public void pressButtonRight(ActionEvent event) {
     	String command = "right";
     	this.processButton(command);
     }
 
+    /**
+     * process the button to rotate left
+     * @param event
+     */
     public void pressButtonLeft(ActionEvent event) {
     	String command = "left";
     	this.processButton(command);
      }
 
+    /**
+     * process the button to move forward
+     * @param event
+     */
     public void pressButtonForward(ActionEvent event) {
     	String command = "forward";
     	this.processButton(command);

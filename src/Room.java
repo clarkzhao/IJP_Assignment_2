@@ -1,9 +1,19 @@
-
+/***
+ * Subclass of Location describing the room with only four directions
+ * @author zhaosiyuan
+ *
+ */
 public class Room extends Location {
+
 	public Room(String locationName, int degree){
 		super(locationName, degree);
 	}
-	public Location moveforward(){
+
+	/***
+	 * currentViewDegree is changed differently when people come back.
+	 * @return
+	 */
+	public Location moveForward(){
 		Location nextLocation = this.exits.get(currentViewDegree);
 		if (nextLocation != null){
 	    	switch (currentViewDegree){
